@@ -1,2 +1,0 @@
-apachepoiswingdemo.A6_GraphStreamFrame
-gtpw_graph.A6_GraphStreamFrame

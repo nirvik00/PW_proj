@@ -1,6 +1,9 @@
 package gtpw_graph;
+
+import java.util.ArrayList;
+
 public class A04_GraphObject {
-    String id;
+    int id;
     String name;
     double qnty;
     double ar_each;
@@ -10,7 +13,8 @@ public class A04_GraphObject {
     int[] rgb;
     String adj_to;
     boolean selected=false;
-    int weight;
+    double weight;
+    String rel_id;
     A04_GraphObject(){
     
     }
@@ -18,7 +22,7 @@ public class A04_GraphObject {
         xPos=xPos_;
         yPos=yPos_;
     }
-    A04_GraphObject(String id_, String name_, double qnty_, double ar_each_, double dim_, String adj_to_, int[] rgb_, int wt_){
+    A04_GraphObject(int id_, String name_, double qnty_, double ar_each_, double dim_, String adj_to_, int[] rgb_, int wt_){
         id=id_;
         name=name_;
         qnty=qnty_;
@@ -29,7 +33,7 @@ public class A04_GraphObject {
         for(int i=0; i<rgb_.length;i++){
             rgb[i]=rgb_[i];
         }
-        weight=wt_;
+        weight=dim*qnty;
     }
     public double getXPos(){
         return xPos;
@@ -45,12 +49,19 @@ public class A04_GraphObject {
         yPos=yPos_;
         return yPos;
     }
-    public String getId(){
+    public int getId(){
         return id;
     }
-    public String setId(String id_){
+    public int setId(int id_){
         id=id_;
         return id;
+    }
+     public String getRelId(){
+        return rel_id;
+    }
+    public String setRelId(String rel_id_){
+        rel_id=rel_id_;
+        return rel_id;
     }
     public String getName(){
         return name;
@@ -108,11 +119,26 @@ public class A04_GraphObject {
         selected=sel_;
         return selected;
     }
-    public int gwtWeight(){
+    public double getWeight(){
         return weight;
     }
-    public int setWeight(int wt_){
+    public double setWeight(int wt_){
         weight=wt_;
         return weight;
+    }
+    public A04_GraphObject copy(A04_GraphObject obj){
+        obj.setId(id);
+        obj.setName(name);
+        obj.setQnty(qnty);
+        obj.setDim(dim);
+        obj.setAdj_to(adj_to);
+        obj.setAr_each(ar_each);
+        //obj.setRgb(rgb);
+        obj.setWeight((int) weight);
+        obj.setXPos(xPos);
+        obj.setYPos(yPos);
+        obj.setRelId(rel_id);
+        obj.setSelected(false);  
+        return obj;
     }
 }

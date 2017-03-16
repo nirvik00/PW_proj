@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 public class A00_GtPwGraphAlgoFrame extends JFrame{
     A01_GraphAlgoPanel pnl;
     A00_GtPwGraphAlgoFrame(){
-        setTitle("GTPW_MAIN_FRAME");
+        setTitle("Gatech & Perkins+Will");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(500,500);

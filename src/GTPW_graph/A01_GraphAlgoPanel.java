@@ -21,9 +21,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class A01_GraphAlgoPanel extends JPanel{
+    A10_DrawFrame frm;
+    A08_ForceFrame treefrm;
+    
     JLabel jLblPath, jLblNAME, jlblMaxDi, jlblMinDi;
     JTextField jtfPath, jtfMaxDi, jtfMinDi;
-    JButton jbtnRead;
+    JButton jbtnRead, jbtnDraw;
     JButton jbtnGraph;
     JLabel jLbl;
     ArrayList<String> dataList;
@@ -42,8 +45,8 @@ public class A01_GraphAlgoPanel extends JPanel{
         jbtnGraph=new JButton("Graph from Data");
         jbtnGraph.setBounds(30,290,350,40);
         
-        jLblNAME=new JLabel("Georgia Institute of Technology & Perkins+Will ");
-        jLblNAME.setBounds(30,375,350,40);        
+        //jLblNAME=new JLabel("Georgia Institute of Technology & Perkins+Will");
+        //jLblNAME.setBounds(30,375,350,40);        
         
         jlblMaxDi=new JLabel("Maximum Distance");
         jlblMaxDi.setBounds(30,230,120,40);
@@ -56,23 +59,27 @@ public class A01_GraphAlgoPanel extends JPanel{
         
         jtfMinDi=new JTextField("50");
         jtfMinDi.setBounds(340,230,30,40);
+
+        jbtnDraw=new JButton("DRAW");
+        jbtnDraw.setBounds(30,375,350,40);
         
         setLayout(null);
         add(jLblPath);
         add(jtfPath);
         add(jbtnRead);
         add(jbtnGraph);
-        add(jLblNAME);
+        //add(jLblNAME);
         add(jlblMaxDi);
         add(jlblMinDi);
         add(jtfMaxDi);
         add(jtfMinDi);
+        add(jbtnDraw);
                 
         jbtnRead.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 try {
                     dataList.clear();
-                    String filePath="c:/users/nirvik saha/desktop/programDocSample.xlsx";
+                    String filePath=jtfPath.getText();
                     FileInputStream fis=new FileInputStream(new File(filePath));
                     XSSFWorkbook workbook=new XSSFWorkbook(fis);
                     XSSFSheet spreadsheet=workbook.getSheetAt(0);
@@ -104,9 +111,16 @@ public class A01_GraphAlgoPanel extends JPanel{
                     //DefGraphFrame defGraphFrm=new DefGraphFrame(dataList);
                     //defGraphFrm.display();
                     A05_GraphStreamFrame graphFrm=new A05_GraphStreamFrame(dataList);
-                    A02_GraphDisplayFrame frm=new A02_GraphDisplayFrame(dataList);
+                    A02_GraphDisplayFrame graphfrm=new A02_GraphDisplayFrame(dataList);
+                    treefrm=new A08_ForceFrame(dataList);
+                    
                 }
             }
+        });
+        jbtnDraw.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){            
+               frm=new A10_DrawFrame(treefrm.pnl.graphObjectList);
+           }
         });
     }
 }

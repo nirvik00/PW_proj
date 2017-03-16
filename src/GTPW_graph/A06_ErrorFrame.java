@@ -8,7 +8,7 @@ public class A06_ErrorFrame extends JFrame{
     A07_ErrorPanel errPnl;
     public A06_ErrorFrame(){
      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-     setTitle("ERROR FRAME");
+     setTitle("Message FRAME");
      setLocation(50,50);
      setSize(250,150);
      errPnl=new A07_ErrorPanel("Error - NO DATA");

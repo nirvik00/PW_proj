@@ -47,11 +47,11 @@ public class A05_GraphStreamFrame extends JFrame{
         nodeList=new ArrayList<Node>();
         
         rnd=new Random();
-        frm=new JFrame("GTPW");
+        frm=new JFrame("GTPW_Layout_Algo_Final");
         frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frm.setSize(700,700);
+        frm.setSize(500,500);
         frm.setVisible(true);
-        frm.setLocation(500,0);
+        frm.setLocation(0,500);
         
         String css="node {text-size:10px; fill-color:rgba(200,0,0,150); size-mode:dyn-size;}";
         Graph graph=new SingleGraph("nirvik saha");
@@ -65,7 +65,7 @@ public class A05_GraphStreamFrame extends JFrame{
             double ar_each=Double.parseDouble(dataList.get(i).split(";")[4]);
             double dim_each=Math.sqrt(ar_each);
             String adj_to=dataList.get(i).split(";")[8];
-            System.out.println(id+","+prog_name+","+qnty+","+ar_each+","+adj_to);
+            //System.out.println(id+","+prog_name+","+qnty+","+ar_each+","+adj_to);
             objDataList.add(id+";"+prog_name+";"+qnty+";"+ar_each+";"+adj_to);
             Node node=graph.addNode(prog_name);
             nodeList.add(node);            
@@ -98,15 +98,15 @@ public class A05_GraphStreamFrame extends JFrame{
             pipe.pump();
             for(int i=0; i<nodeList.size(); i++){
                 String nodeId=nodeList.get(i).getId();
-                System.out.println(nodeId);
+                //System.out.println(nodeId);
                 double[] pos=Toolkit.nodePosition(graph,nodeId);
                 for(int j=0; j<pos.length; j++){
-                    System.out.println(i+"> "+pos[j]);
+                    //System.out.println(i+"> "+pos[j]);
                 }
-                System.out.println("---------------------");
+                //System.out.println("---------------------");
             }
         }catch(Exception e){
-            System.out.println("error on print coordinates");
+           // System.out.println("error on print coordinates");
         }
         frm.add(view);
     }

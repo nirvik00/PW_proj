@@ -1,2 +1,0 @@
-gtpw_graph.WASTE
-apachepoiswingdemo.WASTE
