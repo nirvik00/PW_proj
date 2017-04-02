@@ -12,10 +12,11 @@ import javax.swing.JTextField;
 
 public class A08_ForceFrame extends JFrame{
     A09_ForcePanel pnl;
+    A10_DrawFrame drwFrm;
     U01_ObjectOperations callsplitobj;
     JTextField jtfTextSplit;
     JLabel jlblTextSplit;
-    JButton jbtnCalcSplit, jbtnCalcReset, jbtnStop;
+    JButton jbtnCalcSplit, jbtnCalcReset, jbtnUpdateFigures;
     Random rnd;
     ArrayList<String>dataList, weightList;
     ArrayList<String>minSpanningTree;
@@ -79,8 +80,8 @@ public class A08_ForceFrame extends JFrame{
         jbtnCalcSplit.setBounds(470,HEIGHT-120,100,40);
         jbtnCalcReset=new JButton("Reset");
         jbtnCalcReset.setBounds(620,HEIGHT-120,100,40);
-        jbtnStop=new JButton("Stop");
-        jbtnStop.setBounds(750,HEIGHT-120,100,40);
+        jbtnUpdateFigures=new JButton("Update Figures");
+        jbtnUpdateFigures.setBounds(750,HEIGHT-120,100,40);
         kruskal.sortNode();
         minSpanningTree.addAll(kruskal.minSpanningTree);
         pnl=new A09_ForcePanel(graphObjList, 300, 70, WIDTH, HEIGHT, weightList,minSpanningTree);
@@ -91,7 +92,7 @@ public class A08_ForceFrame extends JFrame{
         add(jtfTextSplit);
         add(jbtnCalcSplit);
         add(jbtnCalcReset);
-        add(jbtnStop);
+        add(jbtnUpdateFigures);
         
         jbtnCalcSplit.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent e){
@@ -114,10 +115,12 @@ public class A08_ForceFrame extends JFrame{
                pnl.graphObjectList.addAll(oriGraphObjList);
            }
         });
-        jbtnStop.addActionListener(new ActionListener(){
+        jbtnUpdateFigures.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                //pnl.updateFigures=true;
+                //drwFrm = new A10_DrawFrame(pnl.graphObjectList);
+                //drwFrm.setVisible(true);
             }
         });
-        
     }
 }

@@ -34,6 +34,7 @@ public class A04_GraphObject {
             rgb[i]=rgb_[i];
         }
         weight=dim*qnty;
+        rel_id="0";
     }
     public double getXPos(){
         return xPos;

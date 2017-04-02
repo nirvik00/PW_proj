@@ -56,6 +56,7 @@ public class A02_GraphDisplayFrame extends JFrame{
             double dy=y+100+r*Math.sin(Math.toRadians(theta));
             graphObjList.get(i).setXPos(dx);
             graphObjList.get(i).setYPos(dy);
+            graphObjList.get(i).setRelId("0");
         }
         weightList=new ArrayList<String>();
         weightList.clear();

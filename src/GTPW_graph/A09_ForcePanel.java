@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-//public class A09_ForcePanel extends JPanel implements MouseListener, ActionListener{
-public class A09_ForcePanel extends JPanel{
+public class A09_ForcePanel extends JPanel implements MouseListener, ActionListener{
+//public class A09_ForcePanel extends JPanel{
     ArrayList<A04_GraphObject>graphObjectList, originalGraphObjectList;
     ArrayList<String>minSpanningTreeStr;
     ArrayList<A04_GraphObject>mstObjectList;
@@ -29,6 +29,7 @@ public class A09_ForcePanel extends JPanel{
     double maxDi,minDi;
     int WIDTH, HEIGHT;
     int timercount=0;
+    boolean updateFigures=false;
     
     A09_ForcePanel(ArrayList<A04_GraphObject>graphObjectList_, double maxDi_, double minDi_, int WIDTH_, int HEIGHT_, ArrayList<String>weightList_,  ArrayList<String>minSpanningTree_){
         //addMouseListener(this);
@@ -106,6 +107,7 @@ public class A09_ForcePanel extends JPanel{
         double XAXIS=0;
         ArrayList<String> mp_line=new ArrayList<String>();
         mstObjectList.clear();
+        g2d.drawString("Representation of AREA of nodes",10,400);
         if(minSpanningTreeStr.size()>0){
             for(int i=0; i<minSpanningTreeStr.size();i++){
                 int id=Integer.parseInt(minSpanningTreeStr.get(i));
@@ -119,20 +121,14 @@ public class A09_ForcePanel extends JPanel{
                         double dim=objA.getDim();
                         double size=qnty*dim;
                         XAXIS+=size;
-                        g2d.setColor(new Color(0,0,0));
+                        g2d.setColor(new Color(0,0,0,50));
                         g2d.draw(new Ellipse2D.Double(XAXIS-size,500-size/2,size,size));
-                        mp_line.add((XAXIS-size/2)+","+(500)+","+idA);
-                        if(i%2==0){
-                            g2d.drawString("#"+id,(int)(XAXIS-size), (int)(HEIGHT/2+50));
-                        }else{
-                            g2d.drawString("#"+id,(int)(XAXIS-size), (int)(HEIGHT/2-50));
-                        }
+                        mp_line.add((XAXIS-size/2)+","+(500)+","+idA+","+size);
                     }
                 }
             }
         }
-        //plot the nodes on a line
-        g2d.translate(0,-300);
+        //plot the nodes on a line        
         for(int i=0; i<mp_line.size()-1; i++){
             double x0=Double.parseDouble(mp_line.get(i).split(",")[0]);
             double y0=Double.parseDouble(mp_line.get(i).split(",")[1]);
@@ -140,53 +136,48 @@ public class A09_ForcePanel extends JPanel{
             double y1=Double.parseDouble(mp_line.get(i+1).split(",")[1]);
             g2d.setColor(new Color(0,0,0));
             g2d.draw(new Line2D.Double(x0,y0,x1,y1));
+            
         }
         //plot node of the line & id
         for(int i=0; i<mp_line.size(); i++){
             double x0=Double.parseDouble(mp_line.get(i).split(",")[0]);
             double y0=Double.parseDouble(mp_line.get(i).split(",")[1]);
             int id=(int)Double.parseDouble(mp_line.get(i).split(",")[2]);
+            double size=Double.parseDouble(mp_line.get(i).split(",")[3]);
             double r=5;
             g2d.setColor(new Color(255,0,0));
             g2d.fill(new Ellipse2D.Double(x0-r/2,y0-r/2,r,r));
             g2d.setColor(new Color(0,0,0));
+            g2d.draw(new Line2D.Double(x0,y0,x0,y0-size/2));
+            if(i>0){
+                double x1=Double.parseDouble(mp_line.get(i-1).split(",")[0]);
+                double y1=Double.parseDouble(mp_line.get(i-1).split(",")[1]);
+                double size1=Double.parseDouble(mp_line.get(i-1).split(",")[3]);
+                g2d.draw(new Line2D.Double(x1,y1-size1/2,x0,y0-size/2));
+            }
             if(i%2==0){
                 g2d.drawString("#"+id,(int)(x0-r),(int)y0+20);
             }else{
                 g2d.drawString("#"+id,(int)(x0-r),(int)y0-15);
             }
         }
-        g2d.translate(-130,130);
+        
+        
+        
         //draw out the minimum spanning tree as a radial sequence
         ArrayList<String> cp_chain=new ArrayList<String>();
+        g2d.setColor(new Color(255,0,0));
+        g2d.drawString("Representation of minimum spanning tree",-10,-70);
         cp_chain.clear();
         for(int i=0; i<mstObjectList.size(); i++){
             A04_GraphObject objA=mstObjectList.get(i);
             int id=objA.getId();
             double x=WIDTH/4;
             double y=HEIGHT/4;
-            double r=(x+y)/3-50;
+            double r=(x+y)/3-20;
             double theta=i*(360/(mstObjectList.size()));
-            double dx=x+r*Math.cos(Math.toRadians(theta));
-            double dy=y-50+r*Math.sin(Math.toRadians(theta));
-            //
-            //
-            //
-            //TWO LINE OF CODE BELOW CAUSED A PROBLEM IN SUBSEQUNT VALUES BECAUSE 
-            //THEY ARE IN REPAINT AND THEY SET THE VALUE OF THE OBJECT
-            //SO THE OBJECT IN A DIFFERENT FRAME WILL ALSO BE UPDATED!!!!
-            //
-            //
-            //objA.setXPos(dx);
-            //objA.setYPos(dy);
-            //-
-            //
-            //TWO LINE OF CODE ABOVE CAUSED A PROBLEM IN SUBSEQUNT VALUES BECAUSE 
-            //THEY ARE IN REPAINT AND THEY SET THE VALUE OF THE OBJECT
-            //SO THE OBJECT IN A DIFFERENT FRAME WILL ALSO BE UPDATED!!!!
-            //
-            //
-            //
+            double dx=x+r*Math.cos(Math.toRadians(theta))-100;
+            double dy=y-50+r*Math.sin(Math.toRadians(theta))-100;
             cp_chain.add(dx+","+dy);
             g2d.setColor(new Color(255,0,0));
             double rx=10.0;
@@ -202,7 +193,8 @@ public class A09_ForcePanel extends JPanel{
             g2d.setColor(new Color(0,0,0,50));
             g2d.draw(new Line2D.Double(x0,y0,x1,y1));
         }
-        g2d.translate(130,70);
+        //WRITE THE DATA
+        g2d.translate(0,-100);
         for(int i=0; i<mstObjectList.size(); i++){
             A04_GraphObject objA=mstObjectList.get(i);
             String name=objA.getName();
@@ -211,7 +203,7 @@ public class A09_ForcePanel extends JPanel{
             String area=String.valueOf(objA.getAr_each());       
             g2d.setColor(new Color(0,0,0));
             double xA=WIDTH-500;
-            double yA=20+i*15;
+            double yA=10+i*25;
             g2d.drawString("id #"+id, (int)xA, (int)yA);
             g2d.drawString(name, (int)xA+50, (int)yA);
             g2d.drawString(qnty, (int)xA+220, (int)yA);
@@ -219,8 +211,6 @@ public class A09_ForcePanel extends JPanel{
         }
         repaint();
     }
-}
-    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         if(minSpanningTreeStr.size()>0){
@@ -271,4 +261,4 @@ public class A09_ForcePanel extends JPanel{
     @Override
     public void mouseExited(MouseEvent e) {
     }
-}*/
+}

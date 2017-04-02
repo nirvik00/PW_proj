@@ -61,7 +61,7 @@ public class U01_ObjectOperations {
     }
     public ArrayList<gtpw_graph.A04_GraphObject> mergeObject(ArrayList<gtpw_graph.A04_GraphObject>oriGraphObjList){
         newGraphObjList.clear();
-        System.out.println("in function");
+        //System.out.println("in function");
         for(int i=0; i<changedObject.size(); i++){
             String s=changedObject.get(i);
             int id=Integer.parseInt(s.split(",")[0]);
@@ -70,16 +70,16 @@ public class U01_ObjectOperations {
                 A04_GraphObject objA=graphObjList.get(j);
                 int idA=objA.getId();
                 double qntyA=objA.getQnty();
-                System.out.println(idA+","+qntyA+"=>"+id+","+qnty_req);
+                //System.out.println(idA+","+qntyA+"=>"+id+","+qnty_req);
                 if(idA==id){
                     objA.setQnty(qnty_req);
                     newGraphObjList.add(objA);
-                    System.out.println("ok");
+                    //System.out.println("ok");
                 }
             }
         }
         for(int i=0; i<newGraphObjList.size(); i++){
-            System.out.println(i+">"+newGraphObjList.get(i).getId()+","+newGraphObjList.get(i).getName());
+            //System.out.println(i+">"+newGraphObjList.get(i).getId()+","+newGraphObjList.get(i).getName());
         }
         return newGraphObjList;
     }

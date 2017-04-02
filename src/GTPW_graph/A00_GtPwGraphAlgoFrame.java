@@ -10,7 +10,7 @@ public class A00_GtPwGraphAlgoFrame extends JFrame{
         setTitle("Gatech & Perkins+Will");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setSize(500,500);
+        setSize(450,1000);
         setLocation(0,0);
         
         pnl=new A01_GraphAlgoPanel();

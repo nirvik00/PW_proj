@@ -259,7 +259,7 @@ public class A03_GraphDisplayPanel extends JPanel implements MouseListener, Acti
             g2d.setColor(new Color(rgb[0],rgb[1],rgb[2],150));
             g2d.fill(new Ellipse2D.Double(xA-dim/2, yA-dim/2, dim, dim));
             g2d.setColor(new Color(0,0,0));
-            g2d.drawString("id #"+idx, (int)xA+5, (int)yA);
+            //g2d.drawString("id #"+idx, (int)xA+5, (int)yA);
         }
         for(int i=0; i<graphObjectList.size(); i++){
             String name=graphObjectList.get(i).getName();
@@ -271,7 +271,7 @@ public class A03_GraphDisplayPanel extends JPanel implements MouseListener, Acti
             int id=graphObjectList.get(i).getId();            
             g2d.setColor(new Color(0,0,0));
             double xA=WIDTH-350;
-            double yA=20+i*15;
+            double yA=20+i*25;
             g2d.drawString("id #"+id, (int)xA, (int)yA);
             g2d.drawString(name, (int)xA+50, (int)yA);
             g2d.drawString(adjStr, (int)xA+220, (int)yA);
